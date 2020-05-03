@@ -169,7 +169,7 @@ var initApp = function () {
 };
 
 var initGame = function () {
-  import("./game.js").then(function (Game) {
+  import("./game.js").then(function ({ default: Game }) {
     var canvas = document.getElementById("entities"),
       background = document.getElementById("background"),
       foreground = document.getElementById("foreground"),

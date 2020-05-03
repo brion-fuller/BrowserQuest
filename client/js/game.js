@@ -17,8 +17,8 @@ import Npc from "./npc.js";
 import Player from "./player.js";
 import Character from "./character.js";
 import Chest from "./chest.js";
-import Mobs from "./mobs.js";
-import Exceptions from "./exceptions.js";
+import * as Mobs from "./mobs.js";
+import * as Exceptions from "./exceptions.js";
 import config from "./config.js";
 
 export default class Game {

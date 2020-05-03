@@ -1,6 +1,7 @@
 import Entity from "./entity.js";
 import Transition from "./transition.js";
 import Timer from "./timer.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Character extends Entity {
   constructor(id, kind) {
