@@ -21,7 +21,7 @@ function main(config) {
         });
       }
     }, 1000));
-
+  global._ = _;
   console.info("Starting BrowserQuest game server...");
 
   server.onConnect(function (connection) {
