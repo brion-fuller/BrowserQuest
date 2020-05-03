@@ -1,3 +1,4 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import Entity from "./entity.js";
 import Transition from "./transition.js";
 import Timer from "./timer.js";
@@ -67,7 +68,7 @@ export default class Character extends Entity {
 
   animate(animation, speed, count, onEndCount) {
     var oriented = ["atk", "walk", "idle"];
-    o = this.orientation;
+    const o = this.orientation;
 
     if (!(this.currentAnimation && this.currentAnimation.name === "death")) {
       // don't change animation if the character is dying

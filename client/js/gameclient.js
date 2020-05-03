@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import EntityFactory from "./entityfactory.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class GameClient {
   constructor(host, port) {

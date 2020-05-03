@@ -1,3 +1,4 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import InfoManager from "./infomanager.js";
 import BubbleManager from "./bubble.js";
 import Renderer from "./renderer.js";
@@ -20,6 +21,7 @@ import Chest from "./chest.js";
 import * as Mobs from "./mobs.js";
 import * as Exceptions from "./exceptions.js";
 import config from "./config.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Game {
   constructor(app) {
@@ -422,9 +424,6 @@ export default class Game {
         entity.sprite = null;
         entity.setSprite(self.sprites[entity.getSpriteName()]);
       });
-      this.initHurtSprites();
-      this.initShadows();
-      this.initCursors();
     }
   }
 
@@ -727,11 +726,13 @@ export default class Game {
     this.loadSprites();
     this.setUpdater(new Updater(this));
     this.camera = this.renderer.camera;
-
-    this.setSpriteScale(this.renderer.scale);
+    self.setSpriteScale(self.renderer.scale);
 
     var wait = setInterval(function () {
       if (self.map.isLoaded && self.spritesLoaded()) {
+        self.initHurtSprites();
+        self.initShadows();
+        self.initCursors();
         self.ready = true;
         console.debug("All sprites loaded.");
 

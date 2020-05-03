@@ -1,4 +1,5 @@
 import $ from "https://dev.jspm.io/jquery@3.5.0";
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import Storage from "./storage.js";
 
 export default class App {

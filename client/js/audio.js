@@ -1,3 +1,4 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import Area from "./area.js";
 
 export default class AudioManager {
@@ -101,7 +102,7 @@ export default class AudioManager {
     sound.addEventListener(
       "canplaythrough",
       function (e) {
-        this.removeEventListener("canplaythrough", arguments.callee, false);
+        this.removeEventListener("canplaythrough", sound, false);
         console.debug(path + " is ready to play.");
         if (loaded_callback) {
           loaded_callback();

@@ -1,3 +1,5 @@
+import Types from "../../shared/js/gametypes.js";
+
 export default class Entity {
   constructor(id, kind) {
     var self = this;

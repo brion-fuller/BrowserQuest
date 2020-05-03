@@ -79,9 +79,9 @@ export default class Sprite {
         data[i] = 255;
         data[i + 1] = data[i + 2] = 75;
       }
-      spriteData.data = data;
+      const newSpriteData = new ImageData(data, width, height);
 
-      ctx.putImageData(spriteData, 0, 0);
+      ctx.putImageData(newSpriteData, 0, 0);
 
       this.whiteSprite = {
         image: canvas,

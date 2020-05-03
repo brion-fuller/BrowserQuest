@@ -1,4 +1,7 @@
 import $ from "https://dev.jspm.io/jquery@3.5.0";
+import _ from "https://dev.jspm.io/underscore@1.10.2";
+
+import Types from "../../shared/js/gametypes.js";
 import Area from "./area.js";
 
 export default class Map {
