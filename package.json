@@ -2,6 +2,7 @@
   "name": "BrowserQuest",
   "version": "0.0.1",
   "private": false,
+  "type": "module",
   "dependencies": {
     "bison": "^1.1.1",
     "log": "^6.0.0",

@@ -1,38 +1,35 @@
-var cls = require("./lib/class"),
-  _ = require("underscore");
+import _ from "underscore";
+import memcache from "memcache";
 
-module.exports = Metrics = Class.extend({
-  init: function (config) {
+export default class Metrics {
+  constructor(config) {
     var self = this;
 
-    this.config = config;
-    this.client = new (require("memcache").Client)(
-      config.memcached_port,
-      config.memcached_host
-    );
-    this.client.connect();
+    // this.config = config;
+    // this.client = new Client(config.memcached_port, config.memcached_host);
+    // this.client.connect();
 
-    this.isReady = false;
+    // this.isReady = false;
 
-    this.client.on("connect", function () {
-      console.info(
-        "Metrics enabled: memcached client connected to " +
-          config.memcached_host +
-          ":" +
-          config.memcached_port
-      );
-      self.isReady = true;
-      if (self.ready_callback) {
-        self.ready_callback();
-      }
-    });
-  },
+    // this.client.on("connect", function () {
+    //   console.info(
+    //     "Metrics enabled: memcached client connected to " +
+    //       config.memcached_host +
+    //       ":" +
+    //       config.memcached_port
+    //   );
+    //   self.isReady = true;
+    //   if (self.ready_callback) {
+    //     self.ready_callback();
+    //   }
+    // });
+  }
 
-  ready: function (callback) {
+  ready(callback) {
     this.ready_callback = callback;
-  },
+  }
 
-  updatePlayerCounters: function (worlds, updatedCallback) {
+  updatePlayerCounters(worlds, updatedCallback) {
     var self = this,
       config = this.config,
       numServers = _.size(config.game_servers),
@@ -76,24 +73,24 @@ module.exports = Metrics = Class.extend({
     } else {
       console.error("Memcached client not connected");
     }
-  },
+  }
 
-  updateWorldDistribution: function (worlds) {
+  updateWorldDistribution(worlds) {
     this.client.set("world_distribution_" + this.config.server_name, worlds);
-  },
+  }
 
-  getOpenWorldCount: function (callback) {
+  getOpenWorldCount(callback) {
     this.client.get("world_count_" + this.config.server_name, function (
       error,
       result
     ) {
       callback(result);
     });
-  },
+  }
 
-  getTotalPlayers: function (callback) {
+  getTotalPlayers(callback) {
     this.client.get("total_players", function (error, result) {
       callback(result);
     });
-  },
-});
+  }
+}

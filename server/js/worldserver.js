@@ -904,3 +904,5 @@ module.exports = World = cls.Class.extend({
     );
   },
 });
+
+export default World;

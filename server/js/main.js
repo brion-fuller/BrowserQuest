@@ -1,11 +1,11 @@
-var fs = require("fs");
-var Metrics = require("./metrics");
+import fs from "fs";
+import Metrics from "./metrics.js";
+import ws from "./ws.js";
+import _ from "underscore";
+import WorldServer from "./worldserver.js";
 
 function main(config) {
-  var ws = require("./ws"),
-    WorldServer = require("./worldserver"),
-    _ = require("underscore"),
-    server = new ws.socketIOServer(config.port),
+  var server = new ws.socketIOServer(config.port),
     metrics = config.metrics_enabled ? new Metrics(config) : null;
   (worlds = []),
     (lastTotalPlayers = 0),
