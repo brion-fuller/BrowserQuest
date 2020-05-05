@@ -1,8 +1,9 @@
 import Entity from "./entity.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Item extends Entity {
   constructor(id, kind, type) {
-    this._super(id, kind);
+    super(id, kind);
 
     this.itemKind = Types.getKindAsString(kind);
     this.type = type;

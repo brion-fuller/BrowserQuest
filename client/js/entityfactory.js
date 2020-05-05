@@ -1,3 +1,4 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import * as Mobs from "./mobs.js";
 import * as Items from "./items.js";
 import * as NPCs from "./npcs.js";

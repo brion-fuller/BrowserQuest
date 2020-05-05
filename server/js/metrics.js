@@ -1,27 +1,29 @@
 import _ from "underscore";
-import memcache from "memcache";
+import Memcached from "memcached";
 
 export default class Metrics {
   constructor(config) {
     var self = this;
 
-    // this.config = config;
-    // this.client = new Client(config.memcached_port, config.memcached_host);
+    this.config = config;
+    this.client = new Memcached(
+      config.memcached_host + ":" + config.memcached_port
+    );
     // this.client.connect();
 
     // this.isReady = false;
 
     // this.client.on("connect", function () {
-    //   console.info(
-    //     "Metrics enabled: memcached client connected to " +
-    //       config.memcached_host +
-    //       ":" +
-    //       config.memcached_port
-    //   );
-    //   self.isReady = true;
-    //   if (self.ready_callback) {
-    //     self.ready_callback();
-    //   }
+    console.info(
+      "Metrics enabled: memcached client connected to " +
+        config.memcached_host +
+        ":" +
+        config.memcached_port
+    );
+    self.isReady = true;
+    if (self.ready_callback) {
+      self.ready_callback();
+    }
     // });
   }
 

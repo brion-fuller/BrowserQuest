@@ -6,7 +6,7 @@ Function.prototype.bind = function (bind) {
   };
 };
 
-var isInt = function (n) {
+export const isInt = function (n) {
   return n % 1 === 0;
 };
 

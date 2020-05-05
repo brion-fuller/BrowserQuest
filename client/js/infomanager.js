@@ -1,3 +1,5 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
+
 export default class InfoManager {
   constructor(game) {
     this.game = game;

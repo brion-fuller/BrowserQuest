@@ -1,6 +1,7 @@
 import Player from "./player.js";
 import EntityFactory from "./entityfactory.js";
 import Types from "../../shared/js/gametypes.js";
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 
 export default class GameClient {
   constructor(host, port) {

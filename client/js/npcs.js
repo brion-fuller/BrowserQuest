@@ -1,4 +1,5 @@
 import Npc from "./npc.js";
+import Types from "../../shared/js/gametypes.js";
 
 export class Guard extends Npc {
   constructor(id) {

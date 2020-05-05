@@ -1,23 +1,23 @@
+import Utils from "./utils.js";
+import Types from "../../shared/js/gametypes.js";
+import Item from "./item.js";
 
-var Utils = require('./utils'),
-    Types = require("../../shared/js/gametypes");
+export default class Chest extends Item {
+  constructor(id, x, y) {
+    super(id, Types.Entities.CHEST, x, y);
+  }
 
-module.exports = Chest = Item.extend({
-    init: function(id, x, y) {
-        this._super(id, Types.Entities.CHEST, x, y);
-    },
-    
-    setItems: function(items) {
-        this.items = items;
-    },
-    
-    getRandomItem: function() {
-        var nbItems = _.size(this.items),
-            item = null;
+  setItems(items) {
+    this.items = items;
+  }
 
-        if(nbItems > 0) {
-            item = this.items[Utils.random(nbItems)];
-        }
-        return item;
+  getRandomItem() {
+    var nbItems = _.size(this.items),
+      item = null;
+
+    if (nbItems > 0) {
+      item = this.items[Utils.random(nbItems)];
     }
-});
+    return item;
+  }
+}

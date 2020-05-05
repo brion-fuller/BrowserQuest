@@ -1,5 +1,6 @@
 import Mob from "./mob.js";
 import Timer from "./timer.js";
+import Types from "../../shared/js/gametypes.js";
 
 export class Rat extends Mob {
   constructor(id) {

@@ -1,3 +1,4 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import AStar from "./lib/astar.js";
 
 export default class Pathfinder {

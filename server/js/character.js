@@ -1,19 +1,17 @@
-var cls = require("./lib/class"),
-  Messages = require("./message"),
-  Utils = require("./utils"),
-  Properties = require("./properties"),
-  Types = require("../../shared/js/gametypes");
+import { Health, Attack } from "./message.js";
+import Utils from "./utils.js";
+import Entity from "./entity.js";
 
-module.exports = Character = Entity.extend({
-  init: function (id, type, kind, x, y) {
-    this._super(id, type, kind, x, y);
+export default class Character extends Entity {
+  constructor(id, type, kind, x, y) {
+    super(id, type, kind, x, y);
 
     this.orientation = Utils.randomOrientation();
     this.attackers = {};
     this.target = null;
-  },
+  }
 
-  getState: function () {
+  getState() {
     var basestate = this._getBaseState(),
       state = [];
 
@@ -23,14 +21,14 @@ module.exports = Character = Entity.extend({
     }
 
     return basestate.concat(state);
-  },
+  }
 
-  resetHitPoints: function (maxHitPoints) {
+  resetHitPoints(maxHitPoints) {
     this.maxHitPoints = maxHitPoints;
     this.hitPoints = this.maxHitPoints;
-  },
+  }
 
-  regenHealthBy: function (value) {
+  regenHealthBy(value) {
     var hp = this.hitPoints,
       max = this.maxHitPoints;
 
@@ -41,52 +39,52 @@ module.exports = Character = Entity.extend({
         this.hitPoints = max;
       }
     }
-  },
+  }
 
-  hasFullHealth: function () {
+  hasFullHealth() {
     return this.hitPoints === this.maxHitPoints;
-  },
+  }
 
-  setTarget: function (entity) {
+  setTarget(entity) {
     this.target = entity.id;
-  },
+  }
 
-  clearTarget: function () {
+  clearTarget() {
     this.target = null;
-  },
+  }
 
-  hasTarget: function () {
+  hasTarget() {
     return this.target !== null;
-  },
+  }
 
-  attack: function () {
-    return new Messages.Attack(this.id, this.target);
-  },
+  attack() {
+    return new Attack(this.id, this.target);
+  }
 
-  health: function () {
-    return new Messages.Health(this.hitPoints, false);
-  },
+  health() {
+    return new Health(this.hitPoints, false);
+  }
 
-  regen: function () {
-    return new Messages.Health(this.hitPoints, true);
-  },
+  regen() {
+    return new Health(this.hitPoints, true);
+  }
 
-  addAttacker: function (entity) {
+  addAttacker(entity) {
     if (entity) {
       this.attackers[entity.id] = entity;
     }
-  },
+  }
 
-  removeAttacker: function (entity) {
+  removeAttacker(entity) {
     if (entity && entity.id in this.attackers) {
       delete this.attackers[entity.id];
       console.debug(this.id + " REMOVED ATTACKER " + entity.id);
     }
-  },
+  }
 
-  forEachAttacker: function (callback) {
+  forEachAttacker(callback) {
     for (var id in this.attackers) {
       callback(this.attackers[id]);
     }
-  },
-});
+  }
+}

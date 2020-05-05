@@ -2053,8 +2053,9 @@ export default class Game {
    */
   findPath(character, x, y, ignoreList) {
     var self = this,
-      grid = this.pathingGrid;
-    (path = []), (isPlayer = character === this.player);
+      grid = this.pathingGrid,
+      path = [],
+      isPlayer = character === this.player;
 
     if (this.map.isColliding(x, y)) {
       return path;

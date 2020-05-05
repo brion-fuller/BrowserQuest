@@ -1,4 +1,4 @@
-var Types = require("../../shared/js/gametypes");
+import Types from "../../shared/js/gametypes.js";
 
 var Properties = {
   rat: {
@@ -179,4 +179,4 @@ Properties.getHitPoints = function (kind) {
   return Properties[Types.getKindAsString(kind)].hp;
 };
 
-module.exports = Properties;
+export default Properties;

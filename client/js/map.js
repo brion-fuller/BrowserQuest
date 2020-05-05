@@ -3,6 +3,7 @@ import _ from "https://dev.jspm.io/underscore@1.10.2";
 
 import Types from "../../shared/js/gametypes.js";
 import Area from "./area.js";
+import { isInt } from "./util.js";
 
 export default class Map {
   constructor(loadMultiTilesheets, game) {

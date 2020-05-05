@@ -1,4 +1,5 @@
 import Item from "./item.js";
+import Types from "../../shared/js/gametypes.js";
 
 export class Sword2 extends Item {
   constructor(id) {

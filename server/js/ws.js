@@ -1,21 +1,14 @@
-var cls = require("./lib/class"),
-  url = require("url"),
-  wsserver = require("socket.io"),
-  //   miksagoConnection = require("websocket-server/lib/ws/connection"),
-  //   worlizeRequest = require("websocket").request,
-  http = require("http"),
-  Utils = require("./utils"),
-  _ = require("underscore"),
-  BISON = require("bison"),
-  WS = {},
-  useBison = false;
-
+import Utils from "./utils.js";
+import _ from "underscore";
+import http from "http";
+import socketio from "socket.io";
 /**
  * Abstract Server and Connection classes
  */
 export class Server {
   constructor(port) {
     this.port = port;
+    this._connections = {};
   }
 
   onConnect(callback) {
@@ -89,18 +82,18 @@ export class SocketIOServer extends Server {
   static _connections = {};
   static _counter = 0;
   constructor(port) {
-    self = this;
+    super(port);
+    const self = this;
     self.port = port;
-    // var app = require("express")();
-    var http = require("http").createServer();
-    self.io = require("socket.io")(http);
+    var server = http.createServer();
+    self.io = socketio(server);
 
     self.io.on("connection", function (connection) {
       console.info("a user connected");
 
       connection.remoteAddress = connection.handshake.address.address;
 
-      var c = new WS.socketIOConnection(self._createId(), connection, self);
+      var c = new SocketIOConnection(connection.id, connection, self);
 
       if (self.connection_callback) {
         self.connection_callback(c);
@@ -113,13 +106,9 @@ export class SocketIOServer extends Server {
       self.error_callback();
     });
 
-    http.listen(port, function () {
+    server.listen(port, function () {
       console.info("listening on *:" + port);
     });
-  }
-
-  _createId() {
-    return "5" + Utils.random(99) + "" + this._counter++;
   }
 
   broadcast(message) {
@@ -133,9 +122,8 @@ export class SocketIOServer extends Server {
 
 export class SocketIOConnection extends Connection {
   constructor(id, connection, server) {
-    var self = this;
-
     super(id, connection, server);
+    var self = this;
 
     // HANDLE DISPATCHER IN HERE
     connection.on("dispatch", function (message) {

@@ -1,8 +1,10 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
 import Camera from "./camera.js";
 import Item from "./item.js";
 import Character from "./character.js";
 import Player from "./player.js";
 import Timer from "./timer.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Renderer {
   constructor(game, canvas, background, foreground) {
@@ -474,11 +476,11 @@ export default class Renderer {
             index =
               frame.index < weaponAnimData.length
                 ? frame.index
-                : frame.index % weaponAnimData.length;
-          (wx = weapon.width * index * os),
-            (wy = weapon.height * anim.row * os),
-            (ww = weapon.width * os),
-            (wh = weapon.height * os);
+                : frame.index % weaponAnimData.length,
+            wx = weapon.width * index * os,
+            wy = weapon.height * anim.row * os,
+            ww = weapon.width * os,
+            wh = weapon.height * os;
 
           this.context.drawImage(
             weapon.image,

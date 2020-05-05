@@ -2,6 +2,7 @@ export class Tile {}
 
 export default class AnimatedTile extends Tile {
   constructor(id, length, speed, index) {
+    super();
     this.startId = id;
     this.id = id;
     this.length = length;

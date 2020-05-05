@@ -1,24 +1,23 @@
+import Area from "./area.js";
 
-var Area = require('./area'),
-    _ = require('underscore'),
-    Types = require("../../shared/js/gametypes");
+export default class ChestArea extends Area {
+  constructor(id, x, y, width, height, cx, cy, items, world) {
+    super(id, x, y, width, height, world);
+    this.items = items;
+    this.chestX = cx;
+    this.chestY = cy;
+  }
 
-module.exports = ChestArea = Area.extend({
-    init: function(id, x, y, width, height, cx, cy, items, world) {
-        this._super(id, x, y, width, height, world);
-        this.items = items;
-        this.chestX = cx;
-        this.chestY = cy;
-    },
-    
-    contains: function(entity) {
-        if(entity) {
-            return entity.x >= this.x
-                && entity.y >= this.y
-                && entity.x < this.x + this.width
-                && entity.y < this.y + this.height;
-        } else {
-            return false;
-        }
+  contains(entity) {
+    if (entity) {
+      return (
+        entity.x >= this.x &&
+        entity.y >= this.y &&
+        entity.x < this.x + this.width &&
+        entity.y < this.y + this.height
+      );
+    } else {
+      return false;
     }
-});
+  }
+}

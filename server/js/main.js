@@ -1,26 +1,27 @@
 import fs from "fs";
 import Metrics from "./metrics.js";
-import ws from "./ws.js";
+import { SocketIOServer } from "./ws.js";
 import _ from "underscore";
 import WorldServer from "./worldserver.js";
+import Player from "./player.js";
 
 function main(config) {
-  var server = new ws.socketIOServer(config.port),
-    metrics = config.metrics_enabled ? new Metrics(config) : null;
-  (worlds = []),
-    (lastTotalPlayers = 0),
-    (checkPopulationInterval = setInterval(function () {
-      if (metrics && metrics.isReady) {
-        metrics.getTotalPlayers(function (totalPlayers) {
-          if (totalPlayers !== lastTotalPlayers) {
-            lastTotalPlayers = totalPlayers;
-            _.each(worlds, function (world) {
-              world.updatePopulation(totalPlayers);
-            });
-          }
-        });
-      }
-    }, 1000));
+  const server = new SocketIOServer(config.port);
+  const metrics = config.metrics_enabled ? new Metrics(config) : null;
+  const worlds = [];
+  const lastTotalPlayers = 0;
+  const checkPopulationInterval = setInterval(function () {
+    if (metrics && metrics.isReady) {
+      metrics.getTotalPlayers(function (totalPlayers) {
+        if (totalPlayers !== lastTotalPlayers) {
+          lastTotalPlayers = totalPlayers;
+          _.each(worlds, function (world) {
+            world.updatePopulation(totalPlayers);
+          });
+        }
+      });
+    }
+  }, 1000);
   global._ = _;
   console.info("Starting BrowserQuest game server...");
 

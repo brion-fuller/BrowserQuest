@@ -1,20 +1,20 @@
-var cls = require("./lib/class"),
-  _ = require("underscore"),
-  Messages = require("./message"),
-  Utils = require("./utils"),
-  Properties = require("./properties");
-var Formulas = require("./formulas"),
-  check = require("./format").check,
-  Types = require("../../shared/js/gametypes");
+import _ from "underscore";
+import { LootMove, Move, Chat } from "./message.js";
+import Utils from "./utils.js";
+import Properties from "./properties.js";
+import * as Formulas from "./formulas.js";
+import { FormatChecker, check } from "./format.js";
+import Types from "../../shared/js/gametypes.js";
+import Character from "./character.js";
 
-module.exports = Player = Character.extend({
-  init: function (connection, worldServer) {
+export default class Player extends Character {
+  constructor(connection, worldServer) {
+    super(connection.id, "player", Types.Entities.WARRIOR, 0, 0, "");
+
     var self = this;
 
     this.server = worldServer;
     this.connection = connection;
-
-    this._super(this.connection.id, "player", Types.Entities.WARRIOR, 0, 0, "");
 
     this.hasEnteredGame = false;
     this.isDead = false;
@@ -93,7 +93,7 @@ module.exports = Player = Character.extend({
         // Sanitized messages may become empty. No need to broadcast empty chat messages.
         if (msg && msg !== "") {
           msg = msg.substr(0, 60); // Enforce maxlength of chat input
-          self.broadcastToZone(new Messages.Chat(self, msg), false);
+          self.broadcastToZone(new Chat(self, msg), false);
         }
       } else if (action === Types.Messages.MOVE) {
         if (self.move_callback) {
@@ -104,7 +104,7 @@ module.exports = Player = Character.extend({
             self.setPosition(x, y);
             self.clearTarget();
 
-            self.broadcast(new Messages.Move(self));
+            self.broadcast(new Move(self));
             self.move_callback(self.x, self.y);
           }
         }
@@ -116,7 +116,7 @@ module.exports = Player = Character.extend({
           if (item) {
             self.clearTarget();
 
-            self.broadcast(new Messages.LootMove(self, item));
+            self.broadcast(new LootMove(self, item));
             self.lootmove_callback(self.x, self.y);
           }
         }
@@ -172,7 +172,7 @@ module.exports = Player = Character.extend({
                 self.broadcast(self.equip(self.armor)); // return to normal after 15 sec
                 self.firepotionTimeout = null;
               }, 15000);
-              self.send(new Messages.HitPoints(self.maxHitPoints).serialize());
+              self.send(HitPoints(self.maxHitPoints).serialize());
             } else if (Types.isHealingItem(kind)) {
               var amount;
 
@@ -203,7 +203,7 @@ module.exports = Player = Character.extend({
           self.setPosition(x, y);
           self.clearTarget();
 
-          self.broadcast(new Messages.Teleport(self));
+          self.broadcast(Teleport(self));
 
           self.server.handlePlayerVanish(self);
           self.server.pushRelevantEntityListTo(self);
@@ -236,9 +236,9 @@ module.exports = Player = Character.extend({
     });
 
     this.connection.sendUTF8("go"); // Notify client that the HELLO/WELCOME handshake can start
-  },
+  }
 
-  destroy: function () {
+  destroy() {
     var self = this;
 
     this.forEachAttacker(function (mob) {
@@ -250,9 +250,9 @@ module.exports = Player = Character.extend({
       mob.forgetPlayer(self.id);
     });
     this.haters = {};
-  },
+  }
 
-  getState: function () {
+  getState() {
     var basestate = this._getBaseState(),
       state = [this.name, this.orientation, this.armor, this.weapon];
 
@@ -261,135 +261,135 @@ module.exports = Player = Character.extend({
     }
 
     return basestate.concat(state);
-  },
+  }
 
-  send: function (message) {
+  send(message) {
     this.connection.send(message);
-  },
+  }
 
-  broadcast: function (message, ignoreSelf) {
+  broadcast(message, ignoreSelf) {
     if (this.broadcast_callback) {
       this.broadcast_callback(
         message,
         ignoreSelf === undefined ? true : ignoreSelf
       );
     }
-  },
+  }
 
-  broadcastToZone: function (message, ignoreSelf) {
+  broadcastToZone(message, ignoreSelf) {
     if (this.broadcastzone_callback) {
       this.broadcastzone_callback(
         message,
         ignoreSelf === undefined ? true : ignoreSelf
       );
     }
-  },
+  }
 
-  onExit: function (callback) {
+  onExit(callback) {
     this.exit_callback = callback;
-  },
+  }
 
-  onMove: function (callback) {
+  onMove(callback) {
     this.move_callback = callback;
-  },
+  }
 
-  onLootMove: function (callback) {
+  onLootMove(callback) {
     this.lootmove_callback = callback;
-  },
+  }
 
-  onZone: function (callback) {
+  onZone(callback) {
     this.zone_callback = callback;
-  },
+  }
 
-  onOrient: function (callback) {
+  onOrient(callback) {
     this.orient_callback = callback;
-  },
+  }
 
-  onMessage: function (callback) {
+  onMessage(callback) {
     this.message_callback = callback;
-  },
+  }
 
-  onBroadcast: function (callback) {
+  onBroadcast(callback) {
     this.broadcast_callback = callback;
-  },
+  }
 
-  onBroadcastToZone: function (callback) {
+  onBroadcastToZone(callback) {
     this.broadcastzone_callback = callback;
-  },
+  }
 
-  equip: function (item) {
-    return new Messages.EquipItem(this, item);
-  },
+  equip(item) {
+    return EquipItem(this, item);
+  }
 
-  addHater: function (mob) {
+  addHater(mob) {
     if (mob) {
       if (!(mob.id in this.haters)) {
         this.haters[mob.id] = mob;
       }
     }
-  },
+  }
 
-  removeHater: function (mob) {
+  removeHater(mob) {
     if (mob && mob.id in this.haters) {
       delete this.haters[mob.id];
     }
-  },
+  }
 
-  forEachHater: function (callback) {
+  forEachHater(callback) {
     _.each(this.haters, function (mob) {
       callback(mob);
     });
-  },
+  }
 
-  equipArmor: function (kind) {
+  equipArmor(kind) {
     this.armor = kind;
     this.armorLevel = Properties.getArmorLevel(kind);
-  },
+  }
 
-  equipWeapon: function (kind) {
+  equipWeapon(kind) {
     this.weapon = kind;
     this.weaponLevel = Properties.getWeaponLevel(kind);
-  },
+  }
 
-  equipItem: function (item) {
+  equipItem(item) {
     if (item) {
       console.debug(this.name + " equips " + Types.getKindAsString(item.kind));
 
       if (Types.isArmor(item.kind)) {
         this.equipArmor(item.kind);
         this.updateHitPoints();
-        this.send(new Messages.HitPoints(this.maxHitPoints).serialize());
+        this.send(HitPoints(this.maxHitPoints).serialize());
       } else if (Types.isWeapon(item.kind)) {
         this.equipWeapon(item.kind);
       }
     }
-  },
+  }
 
-  updateHitPoints: function () {
+  updateHitPoints() {
     this.resetHitPoints(Formulas.hp(this.armorLevel));
-  },
+  }
 
-  updatePosition: function () {
+  updatePosition() {
     if (this.requestpos_callback) {
       var pos = this.requestpos_callback();
       this.setPosition(pos.x, pos.y);
     }
-  },
+  }
 
-  onRequestPosition: function (callback) {
+  onRequestPosition(callback) {
     this.requestpos_callback = callback;
-  },
+  }
 
-  resetTimeout: function () {
+  resetTimeout() {
     clearTimeout(this.disconnectTimeout);
     this.disconnectTimeout = setTimeout(
       this.timeout.bind(this),
       1000 * 60 * 15
     ); // 15 min.
-  },
+  }
 
-  timeout: function () {
+  timeout() {
     this.connection.sendUTF8("timeout");
     this.connection.close("Player was idle for too long");
-  },
-});
+  }
+}

@@ -1,4 +1,5 @@
 import Character from "./character.js";
+import Types from "../../shared/js/gametypes.js";
 
 const NpcTalk = {
   guard: [
