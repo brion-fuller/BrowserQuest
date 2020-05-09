@@ -1,5 +1,5 @@
 import _ from "underscore";
-import { LootMove, Move, Chat } from "./message.js";
+import { LootMove, Move, Chat, EquipItem } from "./message.js";
 import Utils from "./utils.js";
 import Properties from "./properties.js";
 import * as Formulas from "./formulas.js";
@@ -318,7 +318,7 @@ export default class Player extends Character {
   }
 
   equip(item) {
-    return EquipItem(this, item);
+    return new EquipItem(this, item);
   }
 
   addHater(mob) {

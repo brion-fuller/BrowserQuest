@@ -1,3 +1,5 @@
+import _ from "https://dev.jspm.io/underscore@1.10.2";
+
 export default class Storage {
   constructor() {
     if (this.hasLocalStorage() && localStorage.data) {

@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import Timer from "./timer.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Updater {
   constructor(game) {
@@ -94,8 +95,10 @@ export default class Updater {
       speed = 500;
 
     if (z && z.inProgress === false) {
-      var orientation = this.game.zoningOrientation,
-        startValue = (endValue = offset = 0),
+      var orientation = this.game.zoningOrientation;
+      var endValue = 0;
+      var offset = 0;
+      var startValue = 0,
         updateFunc = null,
         endFunc = null;
 

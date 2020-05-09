@@ -409,7 +409,7 @@ export default class World {
   }
 
   createItem(kind, x, y) {
-    var id = "9" + this.itemCount++,
+    var id = Number.parseInt("9" + this.itemCount++),
       item = null;
 
     if (kind === Types.Entities.CHEST) {

@@ -5,11 +5,25 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Client",
+      "url": "http://localhost:5500/client",
+      "webRoot": "${workspaceFolder}"
+    },
+
+    {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Server",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/server/js/main.js"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Server/Client",
+      "configurations": ["Server", "Client"]
     }
   ]
 }

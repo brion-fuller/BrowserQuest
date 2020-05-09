@@ -808,8 +808,8 @@ export default class Renderer {
       shadow = this.game.shadows["small"],
       sw = shadow.width * os,
       sh = shadow.height * os,
-      ox = -sprite.offsetX * os;
-    oy = -sprite.offsetY * os;
+      ox = -sprite.offsetX * os,
+      oy = -sprite.offsetY * os;
 
     canvas.width = w;
     canvas.height = h;

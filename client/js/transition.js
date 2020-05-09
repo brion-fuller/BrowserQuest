@@ -1,5 +1,5 @@
 export default class Transition {
-  construtctor() {
+  constructor() {
     this.startValue = 0;
     this.endValue = 0;
     this.duration = 0;

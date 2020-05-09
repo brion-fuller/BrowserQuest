@@ -1,5 +1,6 @@
 import Character from "./character.js";
 import * as Exceptions from "./exceptions.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Player extends Character {
   static MAX_LEVEL = 10;

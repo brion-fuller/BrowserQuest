@@ -1,4 +1,5 @@
 import Entity from "./entity.js";
+import Types from "../../shared/js/gametypes.js";
 
 export default class Chest extends Entity {
   constructor(id, kind) {

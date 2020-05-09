@@ -2,6 +2,7 @@ import _ from "underscore";
 import * as Messages from "./message.js";
 import Properties from "./properties.js";
 import Character from "./character.js";
+import MobArea from "./mobarea.js";
 
 export default class Mob extends Character {
   constructor(id, kind, x, y) {

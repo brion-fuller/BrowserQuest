@@ -14,7 +14,8 @@ export default class App {
       this.toggleButton.bind(this),
       100
     );
-    (this.$playButton = $(".play")), (this.$playDiv = $(".play div"));
+    this.$playButton = $(".play");
+    this.$playDiv = $(".play div");
   }
 
   setGame(game) {

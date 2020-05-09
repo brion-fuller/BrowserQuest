@@ -2,6 +2,7 @@ import Player from "./player.js";
 import EntityFactory from "./entityfactory.js";
 import Types from "../../shared/js/gametypes.js";
 import _ from "https://dev.jspm.io/underscore@1.10.2";
+import $ from "https://dev.jspm.io/jquery@3.5.0";
 
 export default class GameClient {
   constructor(host, port) {
@@ -34,7 +35,6 @@ export default class GameClient {
     this.handlers[Types.Messages.HP] = this.receiveHitPoints;
     this.handlers[Types.Messages.BLINK] = this.receiveBlink;
 
-    this.useBison = false;
     this.enable();
   }
 

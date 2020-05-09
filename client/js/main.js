@@ -149,7 +149,7 @@ var initApp = function () {
     }
 
     $(".play div").click(function (event) {
-      var nameFromInput = $("#nameinput").attr("value"),
+      var nameFromInput = $("#nameinput").val(),
         nameFromStorage = $("#playername").html(),
         name = nameFromInput || nameFromStorage;
 
@@ -376,8 +376,8 @@ var initGame = function () {
         $chat = $("#chatinput");
 
       if (
-        $("#chatinput:focus").size() == 0 &&
-        $("#nameinput:focus").size() == 0
+        $("#chatinput:focus").length == 0 &&
+        $("#nameinput:focus").length == 0
       ) {
         if (key === 13) {
           // Enter
