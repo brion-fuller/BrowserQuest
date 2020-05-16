@@ -6,7 +6,7 @@ export default class AudioManager {
     var self = this;
 
     this.enabled = true;
-    this.extension = Detect.canPlayMP3() ? "mp3" : "ogg";
+    this.extension = "mp3";
     this.sounds = {};
     this.game = game;
     this.currentMusic = null;
@@ -70,11 +70,7 @@ export default class AudioManager {
       }
     };
 
-    if (!(Detect.isSafari() && Detect.isWindows())) {
-      loadSoundFiles();
-    } else {
-      this.enabled = false; // Disable audio on Safari Windows
-    }
+    loadSoundFiles();
   }
 
   toggle() {

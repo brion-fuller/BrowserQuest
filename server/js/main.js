@@ -113,8 +113,8 @@ function getConfigFile(path, callback) {
   });
 }
 
-var defaultConfigPath = "./server/config.json",
-  customConfigPath = "./server/config_local.json";
+var defaultConfigPath = "./config.json",
+  customConfigPath = "./config_local.json";
 
 process.argv.forEach(function (val, index, array) {
   if (index === 2) {
