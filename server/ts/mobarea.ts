@@ -29,7 +29,7 @@ export default class MobArea extends Area {
     var k = Types.getKindFromString(this.kind),
       pos = this._getRandomPositionInsideArea(),
       mob = new Mob(
-        "1" + this.id + "" + k + "" + this.entities.length,
+        parseInt("1" + this.id + "" + k + "" + this.entities.length),
         k,
         pos.x,
         pos.y

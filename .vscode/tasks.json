@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "server/",
+      "problemMatcher": [],
+      "label": "npm: build - server",
+      "detail": "build server"
+    }
+  ]
+}

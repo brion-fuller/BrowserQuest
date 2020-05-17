@@ -1,12 +1,12 @@
-import { Spawn, Despawn } from "./message";
 import * as Utils from "./utils";
+import { Spawn, Despawn } from "./message";
 
 export default class Entity {
-  id: any;
-  type: any;
-  kind: any;
-  x: any;
-  y: any;
+  id: number;
+  type: string;
+  kind: number;
+  x: number;
+  y: number;
 
   constructor(id, type, kind, x, y) {
     this.id = id;
@@ -16,10 +16,8 @@ export default class Entity {
     this.y = y;
   }
 
-  destroy() {}
-
   _getBaseState() {
-    return [parseInt(this.id), this.kind, this.x, this.y];
+    return [this.id, this.kind, this.x, this.y];
   }
 
   getState() {
