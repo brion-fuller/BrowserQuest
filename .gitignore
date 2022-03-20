@@ -6,3 +6,12 @@ config_local*
 client/audio/music
 .DS_Store
 *.swp
+
+# yarn 
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
