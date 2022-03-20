@@ -1,0 +1,10 @@
+{
+  "name": "@browserquest/client",
+  "packageManager": "yarn@3.2.0",
+  "scripts": {
+    "start": "live-server --mount=/shared:../shared --host=localhost"
+  },
+  "dependencies": {
+    "live-server": "^1.2.1"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "cSpell.words": [
+    "browserquest"
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  }
+}

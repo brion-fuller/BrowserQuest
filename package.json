@@ -1,13 +1,11 @@
 {
-  "name": "BrowserQuest",
+  "name": "@browserquest/browserquest",
   "version": "0.0.1",
-  "private": false,
-  "dependencies": {
-    "bison": "^1.1.1",
-    "log": "^6.0.0",
-    "memcache": "^0.3.0",
-    "sanitizer": "^0.1.3",
-    "socket.io": "^2.3.0",
-    "underscore": "^1.10.2"
+  "private": true,
+  "workspaces": [
+    "./packages/*"
+  ],
+  "scripts": {
+    "start": "yarn workspaces foreach -pti run start"
   }
 }

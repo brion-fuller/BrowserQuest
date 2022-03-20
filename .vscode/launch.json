@@ -7,9 +7,11 @@
     {
       "type": "node",
       "request": "launch",
+      "runtimeExecutable": "yarn",
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/server/js/main.js"
+      "runtimeArgs": ["start"],
+      "cwd": "${workspaceFolder}/packages/server/"
     }
   ]
 }
