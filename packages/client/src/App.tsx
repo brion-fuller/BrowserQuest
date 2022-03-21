@@ -1,13 +1,10 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+// import "./App.css";
 import Intro from "./components/intro";
-import Container from "./components/container";
+import Canvas from "./components/canvas";
 import Footer from "./components/footer";
+import "./game/main";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <a
@@ -17,8 +14,19 @@ function App() {
         href="http://www.mozilla.org/"
       ></a>
       <Intro></Intro>
-      <Container></Container>
+      <Canvas></Canvas>
       <Footer></Footer>
+      <ul id="page-tmpl" className="clickable" style={{ display: "none" }}></ul>
+      <ul>
+        <li id="achievement-tmpl" style={{ display: "none" }}>
+          <div className="coin"></div>
+          <span className="achievement-name">???</span>
+          <span className="achievement-description">???</span>
+          <div className="achievement-sharing">
+            <a href="" className="twitter"></a>
+          </div>
+        </li>
+      </ul>
     </div>
   );
 }

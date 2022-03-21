@@ -324,7 +324,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@browserquest/client-old@workspace:packages/client.old":
+"@browserquest/client-old@workspace:^, @browserquest/client-old@workspace:packages/client.old":
   version: 0.0.0-use.local
   resolution: "@browserquest/client-old@workspace:packages/client.old"
   dependencies:
@@ -336,6 +336,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@browserquest/client@workspace:packages/client"
   dependencies:
+    "@browserquest/client-old": "workspace:^"
     "@types/react": ^17.0.33
     "@types/react-dom": ^17.0.10
     "@vitejs/plugin-react": ^1.0.7
