@@ -13,6 +13,10 @@ The game server currently runs on nodejs v0.4.7 (but should run fine on the late
 
 All of them can be installed via `npm install -d` (this will install a local copy of all the dependencies in the node_modules directory)
 
+In the monorepo workspace layout, install dependencies from the repository root with:
+
+`npm install`
+
 
 Configuration
 -------------
@@ -26,7 +30,7 @@ Deployment
 
 In order to deploy the server, simply copy the `server` and `shared` directories to the staging/production server.
 
-Then run `node server/js/main.js` in order to start the server.
+Then run `npm run start:server` from the repository root, or `npm run start` from the `server/` package directory.
 
 
 Note: the `shared` directory is the only one in the project which is a server dependency.

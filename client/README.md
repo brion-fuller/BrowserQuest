@@ -12,12 +12,11 @@ Edit the contents of this file to change host/port settings.
 
 (Note: nodejs is required to run the build script)
 
-* cd bin
-* chmod +x build.sh
-* ./build.sh
+* npm install
+* npm run build:client
 
-This will use the RequireJS optimizer tool to create a client-build/ directory containing a production-ready version of BrowserQuest. 
+This uses the RequireJS optimizer tool to create `client-build/`, containing a production-ready version of BrowserQuest.
 
-A build log file will also be created at bin/build.txt.
+A build log file will also be created at `client/build.txt`.
 
-The client-build directory can be renamed and deployed anywhere. It has no dependencies to any other file/folder in the repository.
+The `client-build/` directory can be renamed and deployed anywhere. It has no dependencies to any other file/folder in the repository.

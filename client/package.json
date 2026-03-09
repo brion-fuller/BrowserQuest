@@ -1,0 +1,12 @@
+{
+  "name": "@browserquest/client",
+  "version": "0.0.1",
+  "private": true,
+  "description": "BrowserQuest client package",
+  "scripts": {
+    "build": "bash ./bin/build.sh"
+  },
+  "devDependencies": {
+    "requirejs": "^2.3.7"
+  }
+}

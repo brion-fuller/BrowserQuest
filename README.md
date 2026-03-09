@@ -4,6 +4,25 @@ BrowserQuest
 BrowserQuest is a HTML5/JavaScript multiplayer game experiment.
 
 
+Monorepo Structure
+------------------
+
+This repository uses npm workspaces with three isolated packages:
+
+* `client/` - browser client and client build assets
+* `server/` - game server code and runtime configuration
+* `shared/` - shared game types
+
+Install all workspace dependencies from the repository root:
+
+* `npm install`
+
+Common workspace commands from the repository root:
+
+* `npm run build:client`
+* `npm run start:server`
+
+
 Documentation
 -------------
 

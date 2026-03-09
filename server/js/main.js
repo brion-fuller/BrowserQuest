@@ -1,7 +1,23 @@
 var fs = require("fs");
+var path = require("path");
 var Metrics = require("./metrics");
+var serverRoot = path.resolve(__dirname, "..");
+
+function resolveMapFilePath(mapFilePath) {
+  if (!mapFilePath) {
+    return path.join(serverRoot, "maps", "world_server.json");
+  }
+
+  if (path.isAbsolute(mapFilePath)) {
+    return mapFilePath;
+  }
+
+  return path.resolve(serverRoot, mapFilePath.replace(/^\.\/server\//, ""));
+}
 
 function main(config) {
+  config.map_filepath = resolveMapFilePath(config.map_filepath);
+
   var ws = require("./ws"),
     WorldServer = require("./worldserver"),
     _ = require("underscore"),
@@ -112,8 +128,8 @@ function getConfigFile(path, callback) {
   });
 }
 
-var defaultConfigPath = "./server/config.json",
-  customConfigPath = "./server/config_local.json";
+var defaultConfigPath = path.join(serverRoot, "config.json"),
+  customConfigPath = path.join(serverRoot, "config_local.json");
 
 process.argv.forEach(function (val, index, array) {
   if (index === 2) {

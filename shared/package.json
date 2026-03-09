@@ -1,0 +1,7 @@
+{
+  "name": "@browserquest/shared",
+  "version": "0.0.1",
+  "private": true,
+  "description": "BrowserQuest shared game types package",
+  "main": "js/gametypes.js"
+}
