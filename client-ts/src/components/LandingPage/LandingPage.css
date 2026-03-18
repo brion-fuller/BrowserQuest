@@ -1,0 +1,237 @@
+/* Font */
+@font-face {
+    font-family: 'GraphicPixel';
+    src: url('/fonts/graphicpixel-webfont.eot');
+    src: url('/fonts/graphicpixel-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/graphicpixel-webfont.woff') format('woff'),
+         url('/fonts/graphicpixel-webfont.ttf') format('truetype'),
+         url('/fonts/graphicpixel-webfont.svg#GraphicPixelRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Spritesheet elements that scale with --ps */
+#logo, #logosparks,
+#character, #character div,
+.left-ornament, .right-ornament,
+.button, .button div,
+.ribbon .top, .ribbon .bottom {
+    background: url('/img/1/spritesheet.png');
+    background-size: var(--ps) auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Sharing icons always use fixed 844px spritesheet scale */
+.twitter, .facebook {
+    background: url('/img/1/spritesheet.png');
+    background-size: 844px auto;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Load character article — fills .parchment-middle */
+#loadcharacter {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-family: 'GraphicPixel', sans-serif;
+    font-size: clamp(14px, calc(var(--ps) * 0.0237), 30px);
+    opacity: 1;
+    pointer-events: auto;
+    transition: 0.5s opacity linear;
+    overflow: hidden;
+    position: relative;
+}
+.game #loadcharacter { display: none; }
+
+/* h1 */
+#loadcharacter h1 { margin-top: calc(var(--ps) * 0.0237); font-weight: normal; }
+
+/* Ornaments */
+.left-ornament, .right-ornament {
+    height: calc(var(--ps) * 0.0284);
+    width: calc(var(--ps) * 0.0735);
+    display: inline-block;
+    margin: 0 calc(var(--ps) * 0.0178);
+    position: relative;
+    top: calc(var(--ps) * 0.0083);
+}
+.left-ornament  { background-position: calc(var(--ps) * -0.8389) 0; }
+.right-ornament { background-position: calc(var(--ps) * -0.9123) 0; }
+
+/* Play button */
+.play div {
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 1;
+    transition: 0.4s linear opacity;
+}
+.play.disabled div { opacity: 0; pointer-events: none; }
+.play img { display: none; }
+.play.loading img {
+    display: block; position: absolute; top: 54%; left: 50%;
+    height: calc(var(--ps) * 0.0284); width: calc(var(--ps) * 0.0284);
+    margin-top: calc(var(--ps) * -0.0142); margin-left: calc(var(--ps) * -0.0142);
+}
+
+.button {
+    height: calc(var(--ps) * 0.1209);
+    width: calc(var(--ps) * 0.2962);
+    background-position: calc(var(--ps) * -0.5427) calc(var(--ps) * -0.2417);
+    margin: calc(var(--ps) * 0.0237) auto 0 auto;
+    position: relative;
+}
+.play div {
+    height: calc(var(--ps) * 0.1209);
+    width: calc(var(--ps) * 0.2962);
+    background-position: calc(var(--ps) * -0.5427) 0;
+}
+.play div:active        { background-position: calc(var(--ps) * -0.5427) calc(var(--ps) * -0.3626); }
+.play.loading div       { background-position: calc(var(--ps) * -0.5379) calc(var(--ps) * -1.7204); }
+
+/* Stroke text outline — em-based so it scales with font-size */
+.stroke {
+    text-shadow:
+        0.1em 0.1em 0 #373737, 0.1em -0.1em 0 #373737,
+        0 0.1em 0 #373737, 0.1em 0 0 #373737,
+        -0.1em 0.1em 0 #373737, -0.1em -0.1em 0 #373737,
+        0 -0.1em 0 #373737, -0.1em 0 0 #373737;
+}
+
+/* Player name & image */
+#playername { color: #fff; margin-top: calc(var(--ps) * 0.0119); }
+#playerimage {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    height: calc(var(--ps) * 0.0758);
+    width: calc(var(--ps) * 0.0758);
+}
+
+/* Create new */
+#create-new span:hover { cursor: pointer; color: #d83939; }
+#create-new span span { color: #b2af9b; }
+#create-new span span:hover { color: #b2af9b; }
+
+/* Ribbon */
+.ribbon {
+    position: absolute;
+    width: calc(var(--ps) * 0.0427);
+    right: calc(var(--ps) * 0.1173);
+    top: calc(var(--ps) * -0.0095);
+    cursor: pointer;
+}
+.ribbon .top {
+    width: 100%;
+    height: calc(var(--ps) * 0.0142);
+    background-position: calc(var(--ps) * -0.9028) calc(var(--ps) * -0.4076);
+    transition: 0.25s height ease;
+}
+.ribbon .bottom {
+    width: 100%;
+    height: calc(var(--ps) * 0.0521);
+    background-position: calc(var(--ps) * -0.9028) calc(var(--ps) * -0.4384);
+}
+.ribbon:hover .top    { height: calc(var(--ps) * 0.0237); }
+.ribbon:hover .bottom { background-position: calc(var(--ps) * -0.9455) calc(var(--ps) * -0.4384); }
+
+/* Tap highlight */
+.ribbon, .play, .play div { -webkit-tap-highlight-color: transparent; }
+
+/* ── Character sprite preview (create new player) ────────────────────────── */
+#character {
+    height: calc(var(--ps) * 0.0498);
+    width: calc(var(--ps) * 0.0284);
+    margin: calc(var(--ps) * 0.0355) auto 0;
+    background-position:
+        calc(var(--ps) * -0.8389)
+        calc(var(--ps) * -0.0284);
+    position: relative;
+}
+#character div {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0; left: 0;
+    background-position:
+        calc(var(--ps) * -0.8673)
+        calc(var(--ps) * -0.0284);
+    opacity: 1;
+    transition: 0.4s opacity linear;
+}
+#character.disabled div { opacity: 0; pointer-events: none; }
+
+/* ── Name input ───────────────────────────────────────────────────────────── */
+#character-form { margin: 0; }
+#nameinput {
+    display: block;
+    margin: calc(var(--ps) * 0.0237) auto 0;
+    width: 50%;
+    padding: 0 0.5em;
+    height: 2em;
+    border: 0.1em dashed #b2af9b;
+    border-radius: 0.3em;
+    font-family: 'GraphicPixel', sans-serif;
+    font-size: 1em;
+    text-align: center;
+    color: #eee;
+    background: rgba(0, 0, 0, 0.05);
+}
+#nameinput:focus {
+    outline: none;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.3);
+}
+#nameinput::placeholder { color: rgba(255, 255, 255, 0.7); }
+
+/* ── Logo ─────────────────────────────────────────────────────────────── */
+#logo {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: calc(var(--ps) * 0.5427);
+    height: calc(var(--ps) * 0.0996);
+    margin-left: calc(var(--ps) * -0.2714);
+    background-position: 0 0;
+    z-index: 3;
+    font-size: 0;
+}
+#logosparks {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    animation: bqLogoSparks 0.8s steps(6, end) infinite;
+}
+@keyframes bqLogoSparks {
+    from { background-position: 0 calc(var(--ps) * -0.0996); }
+    to   { background-position: 0 calc(var(--ps) * -0.6967); }
+}
+
+/* ── Footer / Sharing ─────────────────────────────────────────────────── */
+footer {
+    font-family: 'GraphicPixel', sans-serif;
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: #c6c0a3;
+    transition: 0.2s opacity linear;
+}
+#sharing { display: inline-block; }
+#sharing a {
+    display: block;
+    float: right;
+    position: relative;
+    top: -2px;
+    transition: transform 0.1s ease;
+}
+#sharing .twitter  { height: 22px; width: 32px; background-position: -770px -224px; margin: 0 12px 0 0; }
+#sharing .facebook { height: 22px; width: 22px; background-position: -822px -224px; margin: 0 12px; }
+#sharing a:hover  { transform: scale(1.2); }
+#sharing a:active { transform: scale(1); }
+
